@@ -36,7 +36,6 @@ pipeline {
                     '''
                 }
 
-    stages {
         stage('Deploy') {
             agent {
                 docker {
@@ -51,13 +50,11 @@ pipeline {
                     netlify --version
                 '''
             }            
-        }
-
+        }         
+    }
     post {
             always {
                 junit 'test-results/junit.xml'
             }
         }
-        }        
-    }
 }
