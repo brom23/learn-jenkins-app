@@ -10,31 +10,31 @@ pipeline {
                 }
             }
             steps {
-                //echo 'Hello World'
                 sh '''
-                ls -la
-                node --version
-                npm --version
-                npm ci
-                npm run build
-                ls -la
+                    ls -la
+                    node --version
+                    npm --version
+                    npm ci
+                    npm run build
+                    ls -la
                 '''
-            }            
+            }
         }
 
-        stage('Test'){
+        stage('Test') {
             agent {
                 docker {
                     image 'node:18-alpine'
                     reuseNode true
                 }
             }
-                steps {
-                    sh '''
+            steps {
+                sh '''
                     test -f build/index.html
                     npm test
-                    '''
-                }
+                '''
+            }
+        }
 
         stage('Deploy') {
             agent {
@@ -44,17 +44,17 @@ pipeline {
                 }
             }
             steps {
-                //echo 'Hello World'
                 sh '''
-                    npm install netlify-cli -g
+                    npm install -g netlify-cli
                     netlify --version
                 '''
-            }            
-        }         
-    }
-    post {
-            always {
-                junit 'test-results/junit.xml'
             }
         }
+    }
+
+    post {
+        always {
+            junit 'test-results/junit.xml'
+        }
+    }
 }
