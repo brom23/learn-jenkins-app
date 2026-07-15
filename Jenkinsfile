@@ -20,6 +20,12 @@ pipeline {
                 ls -la
                 '''
             }
+
+            stage('Build'){
+                steps {
+                    echo 'Test stage'
+                }
+            }
         }
     }
 }
