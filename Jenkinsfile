@@ -41,6 +41,15 @@ pipeline {
             }
         }
 
+        stage('Export Results') {
+            steps {
+                sh '''
+                    mkdir -p /results
+                    cp -r test-results/* /results/
+                '''
+            }
+        }
+
         stage('Deploy') {
             agent {
                 docker {
