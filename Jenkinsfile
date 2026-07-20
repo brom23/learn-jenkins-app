@@ -44,8 +44,8 @@ pipeline {
         stage('Export Results') {
             steps {
                 sh '''
-                    mkdir -p /results
-                    cp -r test-results/* /results/
+                    mkdir -p $JENKINS_HOME/results
+                    cp -r test-results/* $JENKINS_HOME/results/
                 '''
             }
         }
