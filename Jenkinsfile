@@ -73,6 +73,7 @@ pipeline {
         always {
             junit 'test-results/junit.xml'
             archiveArtifacts 'test-results/**'
+            sh 'echo wartosc zmiennej Jenkins_Home = $JENKINS_HOME'
         }
     }
 }
