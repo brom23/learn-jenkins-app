@@ -41,14 +41,14 @@ pipeline {
             }
         }
 
-        stage('Export Results') {
-            steps {
-                sh '''
-                    mkdir -p $JENKINS_HOME/results
-                    cp -r test-results/* $JENKINS_HOME/results/
-                '''
-            }
-        }
+        // stage('Export Results') {
+        //     steps {
+        //         sh '''
+        //             mkdir -p /results
+        //             cp -r test-results/* /results/
+        //         '''
+        //     }
+        // }
 
         stage('Deploy') {
             agent {
@@ -72,6 +72,7 @@ pipeline {
     post {
         always {
             junit 'test-results/junit.xml'
+            archiveArtifacts 'test-results/**'
         }
     }
 }
